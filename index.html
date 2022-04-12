@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,17 +11,39 @@
     <title>Katakanlah</title>
     <link rel="apple-touch-icon" href="/images/icons/maskable_icon_x192.png" />
     <link rel="manifest" href="manifest.json" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/app.js" defer></script>
   </head>
   <body>
-    <h1>Katakanlah</h1>
-    <textarea name="text" id="text" cols="30" rows="10"></textarea>
-    <select name="langlist" id="langlist"></select>
-    <input type="range" name="rate" id="rate" />
-    <input type="range" name="pitch" id="pitch" />
-    <button>Katakan</button>
-    <button>Jeda</button>
-    <button>Hentikan</button>
+    <header>
+      <div class="container">
+        <h1>Katakanlah</h1>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <textarea name="text" id="text" cols="30" rows="10"></textarea>
+        <select name="langlist" id="langlist"></select>
+        <input type="range" name="rate" id="rate" />
+        <input type="range" name="pitch" id="pitch" />
+        <button>Katakan</button>
+        <button>Jeda</button>
+        <button>Hentikan</button>
+      </div>
+    </main>
+    <footer>
+      <nav>
+        <ul>
+          <li>
+            <a href="#">&#128488; <span>Teks ke Suara</span></a>
+          </li>
+          <li>
+            <a href="#">&#128483; <span>Suara ke Teks</span></a>
+          </li>
+        </ul>
+      </nav>
+    </footer>
   </body>
 </html>
