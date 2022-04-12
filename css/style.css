@@ -1,0 +1,75 @@
+/* 
+*=============================================================
+* CSS RESET
+*=============================================================
+*/
+
+:root {
+  --ff-body: "Heebo", sans-serif;
+  --ff-heading: "Oswald", sans-serif;
+
+  --clr-primary: hsl(198, 100%, 45%);
+  --clr-secondary-blue: hsl(198, 100%, 75%);
+  --clr-secondary-red: hsl(355, 78%, 56%);
+  --clr-secondary-yelllow: hsl(57, 100%, 50%);
+
+  --fs-xl: clamp(3rem, 1rem + 10vw, 6rem);
+  --fs-600: 1.8rem;
+  --fs-500: 1.5rem;
+  --fs-400: 1.125rem;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* 
+*=============================================================
+* Layout
+*=============================================================
+*/
+
+textarea {
+  resize: none;
+  max-height: 50vmax;
+}
+
+input[type="range"] {
+  accent-color: #e63947;
+}
+
+.btn {
+  color: #fafafa;
+}
+
+.btn.btn-katakan {
+  background-color: #00a2e8;
+}
+
+.btn.btn-pause {
+  background-color: #fff200;
+}
+
+.btn-stop {
+  background-color: #e63947;
+}
