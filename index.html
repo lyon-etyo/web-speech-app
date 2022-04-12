@@ -8,11 +8,19 @@
     <meta name="description" content="Text to Speech and Speech Recognition app" />
     <meta name="keywords" content="text to speech,speech recognition" />
     <title>Katakanlah</title>
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="stylesheet" href="/css/style.css" />
-    <script src="/js/app.js" defer></script>
+    <link rel="apple-touch-icon" href="/images/icons/maskable_icon_x192.png" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/app.js" defer></script>
   </head>
   <body>
     <h1>Katakanlah</h1>
+    <textarea name="text" id="text" cols="30" rows="10"></textarea>
+    <select name="langlist" id="langlist"></select>
+    <input type="range" name="rate" id="rate" />
+    <input type="range" name="pitch" id="pitch" />
+    <button>Katakan</button>
+    <button>Jeda</button>
+    <button>Hentikan</button>
   </body>
 </html>
