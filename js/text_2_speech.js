@@ -32,13 +32,17 @@ const options = document.querySelectorAll("[type='range']");
 // Fungsi untuk mengambil bahasa-bahasa suara yang tersedia
 // di dalam Speech Synthesis
 function populateVoices() {
-  voices = speechSynthesis.getVoices().sort(function (a, b) {
-    const aname = a.name.toUpperCase(),
-      bname = b.name.toUpperCase();
-    if (aname < bname) return -1;
-    else if (aname == bname) return 0;
-    else return +1;
-  });
+  try {
+    voices = speechSynthesis.getVoices().sort(function (a, b) {
+      const aname = a.name.toUpperCase(),
+        bname = b.name.toUpperCase();
+      if (aname < bname) return -1;
+      else if (aname == bname) return 0;
+      else return +1;
+    });
+  } catch (error) {
+    console.error(error);
+  }
 
   const optionElement = document.createElement("option");
   voices.forEach(voice => {
@@ -50,13 +54,17 @@ function populateVoices() {
 
 // Fungsi untuk mengucapkan ucapan
 function playSpeech() {
-  // Jika sedang dijeda maka lanjutkan berbicara
-  if (speechSynthesis.paused && speechSynthesis.speaking) {
-    speechSynthesis.resume();
-  }
+  try {
+    // Jika sedang dijeda maka lanjutkan berbicara
+    if (speechSynthesis.paused && speechSynthesis.speaking) {
+      speechSynthesis.resume();
+    }
 
-  // Mengucapkan ucapan
-  speechSynthesis.speak(utterance);
+    // Mengucapkan ucapan
+    speechSynthesis.speak(utterance);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 // Fungsi untuk menjeda ucapan
@@ -66,9 +74,13 @@ function pauseSpeech() {
 
 // Fungsi untuk menghentikan ucapan yang sedang diucapkan
 function stopSpeech() {
-  speechSynthesis.resume();
-  speechSynthesis.cancel();
-  utterance.text = "";
+  try {
+    speechSynthesis.resume();
+    speechSynthesis.cancel();
+    utterance.text = "";
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 // Fungsi untuk melanjutkan ucapan dari kata yang terakhir diucapkan
@@ -82,17 +94,25 @@ function resumeFromLastWord() {
 
 // Fungsi untuk mengeset properti bahasa ucapan
 function setVoice() {
-  utterance.voice = voices.find(voice => voice.name === this.value);
-  resumeFromLastWord();
+  try {
+    utterance.voice = voices.find(voice => voice.name === this.value);
+    resumeFromLastWord();
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 // Fungsi untuk mengeset properti rate atau pitch pada speech
 // kemudian melanjutkan berbicara
 // jika reset = true maka nilai rate dan pitch
 function setOption(reset) {
-  if (reset) this.value = 1.0;
-  utterance[this.name] = this.value;
-  resumeFromLastWord();
+  try {
+    if (reset) this.value = 1.0;
+    utterance[this.name] = this.value;
+    resumeFromLastWord();
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 // Fungsi untuk mendisable beberapa input sekaligus
