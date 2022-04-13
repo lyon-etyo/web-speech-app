@@ -1,6 +1,6 @@
-// Check if service worker supported then proceed to register service worker
+// Cek apakah layana servis worker didukung oleh peramban
+// jika didukung daftarkan service worker
 if ("serviceWorker" in navigator) {
-  // Use the window load event to keep the page load performant
   window.addEventListener("load", async _ => {
     try {
       await navigator.serviceWorker.register("/sw.js");
