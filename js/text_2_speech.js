@@ -43,19 +43,9 @@ function populateVoices() {
   const optionElement = document.createElement("option");
   voices.forEach(voice => {
     const option = optionElement.cloneNode();
-    [option.value, option.textContent] = voice.name;
+    [option.value, option.textContent] = [voice.name, voice.name];
     voiceLangList.appendChild(option);
   });
-}
-
-// Fungsi untuk melakukan persiapan sebelum ucapan diucapkan
-function setVoice() {
-  utterance.voice = voices.find(voice => voice.name === this.value);
-}
-
-// Fungsi untuk mendisable beberapa input sekaligus
-function disableElements(disableState, ...elements) {
-  elements.forEach(element => (element.disabled = disableState));
 }
 
 // Fungsi untuk mengucapkan ucapan
@@ -63,12 +53,7 @@ function playSpeech() {
   // Jika sedang dijeda maka lanjutkan berbicara
   if (speechSynthesis.paused && speechSynthesis.speaking) {
     speechSynthesis.resume();
-    disableElements(true, speakButton, voiceLangList);
   }
-
-  // Mendisable fungsionalitas elemen teks area, tombol katakan,
-  // dan pilihan bahasa ucapan
-  disableElements(true, textarea, speakButton, voiceLangList);
 
   // Mengucapkan ucapan
   speechSynthesis.speak(utterance);
@@ -76,10 +61,7 @@ function playSpeech() {
 
 // Fungsi untuk menjeda ucapan
 function pauseSpeech() {
-  if (speechSynthesis.speaking) {
-    speechSynthesis.pause();
-    disableElements(false, speakButton, voiceLangList);
-  }
+  if (speechSynthesis.speaking) speechSynthesis.pause();
 }
 
 // Fungsi untuk menghentikan ucapan yang sedang diucapkan
@@ -89,15 +71,33 @@ function stopSpeech() {
   utterance.text = "";
 }
 
+// Fungsi untuk melanjutkan ucapan dari kata yang terakhir diucapkan
+function resumeFromLastWord() {
+  if (utterance.text) {
+    speechSynthesis.cancel();
+    utterance.text = utterance.text.substring(currentCharacter);
+    playSpeech();
+  }
+}
+
+// Fungsi untuk mengeset properti bahasa ucapan
+function setVoice() {
+  utterance.voice = voices.find(voice => voice.name === this.value);
+  resumeFromLastWord();
+}
+
 // Fungsi untuk mengeset properti rate atau pitch pada speech
 // kemudian melanjutkan berbicara
 // jika reset = true maka nilai rate dan pitch
 function setOption(reset) {
-  speechSynthesis.cancel();
-  utterance.text = utterance.text.substring(currentCharacter);
   if (reset) this.value = 1.0;
   utterance[this.name] = this.value;
-  playSpeech();
+  resumeFromLastWord();
+}
+
+// Fungsi untuk mendisable beberapa input sekaligus
+function disableElements(disableState, ...elements) {
+  elements.forEach(element => (element.disabled = disableState));
 }
 
 /* 
@@ -106,12 +106,13 @@ function setOption(reset) {
 ===============================================================================
 */
 
-// Ketika awal halaman dimuat
+// // Ketika awal halaman dimuat
 populateVoices();
 // Fallback code untuk browser selain chrome
 if (speechSynthesis.onvoiceschanged !== undefined) {
   speechSynthesis.onvoiceschanged = populateVoices;
 }
+// speechSynthesis.addEventListener("voiceschanged", populateVoices);
 
 // Ketika terjadi perubahan pilihan pada pilihan bahasa ucapan
 voiceLangList.addEventListener("change", setVoice);
@@ -136,11 +137,29 @@ speakButton.addEventListener("click", evt => {
 pauseButton.addEventListener("click", pauseSpeech);
 stopButton.addEventListener("click", stopSpeech);
 
-// Ketika ucapan berada kata terakhir yang saat ini sedang diucapkan
-utterance.addEventListener("boundary", evt => (currentCharacter = evt.charIndex));
+// Ketika ucapan mulai diucapkan nonaktifkan fungsionaltas dari
+// teks area, tombol katakan dan pilihan bahasa ucapan
+utterance.addEventListener("start", evt => {
+  disableElements(true, textarea, speakButton, voiceLangList);
+});
 
-// Ketika ucapan selesai diucapkan kembalikan fungsionaltas dari
+// Ketika ucapan dijeda aktifkan kembali fungsionaltas dari
+// tombol katakan dan pilihan bahasa ucapan
+utterance.addEventListener("pause", evt => {
+  disableElements(false, speakButton, voiceLangList);
+});
+
+// Ketika ucapan dilanjutkan untuk diucapkan nonaktifkan fungsionaltas dari
+// tombol katakan dan pilihan bahasa ucapan
+utterance.addEventListener("resume", evt => {
+  disableElements(true, speakButton, voiceLangList);
+});
+
+// Ketika ucapan selesai diucapkan aktifkan kembali fungsionaltas dari
 // teks area, tombol katakan, dan pilihan bahasa ucapan
-utterance.addEventListener("end", _ => {
+utterance.addEventListener("end", evt => {
   disableElements(false, textarea, speakButton, voiceLangList);
 });
+
+// Ketika ucapan berada kata terakhir yang saat ini sedang diucapkan
+utterance.addEventListener("boundary", evt => (currentCharacter = evt.charIndex));
