@@ -22,6 +22,7 @@ const speakButton = document.querySelector(".btn-katakan");
 const pauseButton = document.querySelector(".btn-pause");
 const stopButton = document.querySelector(".btn-stop");
 const options = document.querySelectorAll("[type='range']");
+const optionsLabel = document.querySelectorAll(".label-value");
 
 /* 
 ===============================================================================
@@ -146,6 +147,9 @@ voiceLangList.addEventListener("change", setVoice);
 options.forEach(option => {
   option.addEventListener("change", evt => {
     setOption.call(option, false);
+    optionsLabel.forEach(label => {
+      if (label.classList.contains(option.name)) label.textContent = option.value;
+    });
   });
   option.addEventListener("contextmenu", evt => {
     evt.preventDefault();
