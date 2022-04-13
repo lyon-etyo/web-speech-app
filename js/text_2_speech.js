@@ -98,9 +98,9 @@ function resumeFromLastWord() {
 
 // Fungsi untuk mengeset properti bahasa ucapan
 function setVoice() {
-  if (!textarea.value || !utterance.text) return;
   try {
     utterance.voice = voices.find(voice => voice.name === this.value);
+    if (!textarea.value || !utterance.text) return;
     resumeFromLastWord();
   } catch (error) {
     console.error(error);
@@ -111,14 +111,21 @@ function setVoice() {
 // kemudian melanjutkan berbicara
 // jika reset = true maka nilai rate dan pitch
 function setOption(reset) {
-  if (!textarea.value || !utterance.text) return;
   try {
     if (reset) this.value = 1.0;
     utterance[this.name] = this.value;
+    if (!textarea.value || !utterance.text) return;
     resumeFromLastWord();
   } catch (error) {
     console.log(error);
   }
+}
+
+// Fungsi untuk mengeset nilai label pada label kecepatan dan ketinggian
+function setOptionLabelValue(optionsLabel, option) {
+  optionsLabel.forEach(label => {
+    if (label.classList.contains(option.name)) label.textContent = option.value;
+  });
 }
 
 // Fungsi untuk menonaktifkan beberapa input sekaligus
@@ -147,13 +154,12 @@ voiceLangList.addEventListener("change", setVoice);
 options.forEach(option => {
   option.addEventListener("change", evt => {
     setOption.call(option, false);
-    optionsLabel.forEach(label => {
-      if (label.classList.contains(option.name)) label.textContent = option.value;
-    });
+    setOptionLabelValue(optionsLabel, option);
   });
   option.addEventListener("contextmenu", evt => {
     evt.preventDefault();
     setOption.call(option, true);
+    setOptionLabelValue(optionsLabel, option);
   });
 });
 
@@ -176,18 +182,23 @@ utterance.addEventListener("start", evt => {
 // Ketika ucapan dijeda aktifkan kembali fungsionaltas dari
 // tombol katakan dan pilihan bahasa ucapan
 utterance.addEventListener("pause", evt => {
+  speakButton.textContent = "Lanjutkan";
+  disableElements(true, pauseButton);
   disableElements(false, speakButton, voiceLangList);
 });
 
 // Ketika ucapan dilanjutkan untuk diucapkan nonaktifkan fungsionaltas dari
 // tombol katakan dan pilihan bahasa ucapan
 utterance.addEventListener("resume", evt => {
+  speakButton.textContent = "Katakan";
   disableElements(true, speakButton, voiceLangList);
+  disableElements(false, pauseButton);
 });
 
 // Ketika ucapan selesai diucapkan aktifkan kembali fungsionaltas dari
 // teks area, tombol katakan, dan pilihan bahasa ucapan
 utterance.addEventListener("end", evt => {
+  speakButton.textContent = "Katakan";
   disableElements(false, textarea, speakButton, voiceLangList);
   disableElements(true, stopButton, pauseButton);
 });
