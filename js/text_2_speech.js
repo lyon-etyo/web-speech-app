@@ -18,7 +18,7 @@ let currentCharacterIndex;
 // Akses DOM
 const textarea = document.querySelector(".text");
 const voiceLangList = document.querySelector(".langlist");
-const speakButton = document.querySelector(".btn-katakan");
+const speakButton = document.querySelector(".btn-katakanlah");
 const pauseButton = document.querySelector(".btn-pause");
 const stopButton = document.querySelector(".btn-stop");
 const options = document.querySelectorAll("[type='range']");
@@ -163,7 +163,7 @@ options.forEach(option => {
   });
 });
 
-// Ketika tombol katakan, jeda, dan hentikan diklik
+// Ketika tombol katakanlah, jeda, dan hentikan diklik
 speakButton.addEventListener("click", evt => {
   // Mengucapkan ucapan dengan teks dari textarea
   utterance.text = textarea.value;
@@ -173,14 +173,14 @@ pauseButton.addEventListener("click", pauseSpeech);
 stopButton.addEventListener("click", stopSpeech);
 
 // Ketika ucapan mulai diucapkan nonaktifkan fungsionaltas dari
-// teks area, tombol katakan dan pilihan bahasa ucapan
+// teks area, tombol katakanlah dan pilihan bahasa ucapan
 utterance.addEventListener("start", evt => {
   disableElements(true, textarea, speakButton, voiceLangList);
   disableElements(false, stopButton, pauseButton);
 });
 
 // Ketika ucapan dijeda aktifkan kembali fungsionaltas dari
-// tombol katakan dan pilihan bahasa ucapan
+// tombol katakanlah dan pilihan bahasa ucapan
 utterance.addEventListener("pause", evt => {
   speakButton.textContent = "Lanjutkan";
   disableElements(true, pauseButton);
@@ -188,17 +188,17 @@ utterance.addEventListener("pause", evt => {
 });
 
 // Ketika ucapan dilanjutkan untuk diucapkan nonaktifkan fungsionaltas dari
-// tombol katakan dan pilihan bahasa ucapan
+// tombol katakanlah dan pilihan bahasa ucapan
 utterance.addEventListener("resume", evt => {
-  speakButton.textContent = "Katakan";
+  speakButton.textContent = "katakanlahlah";
   disableElements(true, speakButton, voiceLangList);
   disableElements(false, pauseButton);
 });
 
 // Ketika ucapan selesai diucapkan aktifkan kembali fungsionaltas dari
-// teks area, tombol katakan, dan pilihan bahasa ucapan
+// teks area, tombol katakanlah, dan pilihan bahasa ucapan
 utterance.addEventListener("end", evt => {
-  speakButton.textContent = "Katakan";
+  speakButton.textContent = "katakanlahlah";
   disableElements(false, textarea, speakButton, voiceLangList);
   disableElements(true, stopButton, pauseButton);
 });
