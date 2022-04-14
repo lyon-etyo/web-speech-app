@@ -19,54 +19,77 @@
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="js/app.js" defer></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/app.js" defer></script>
+    <script src="/js/text_2_speech.js" defer></script>
   </head>
   <body>
+    <!-- Awal Header, Berisi judul aplikasi dan ink bantuna -->
     <header>
       <div class="container">
         <h2>Katakanlah</h2>
       </div>
+      <a class="help" title="Bantuan" href="#">?</a>
     </header>
+    <!-- Akhir Header -->
+
+    <!-- Awal Main, berisi markup utama aplikasi -->
     <main>
       <div class="container">
         <div class="row">
           <textarea
-            name="text"
-            id="text"
+            class="text"
             cols="30"
             rows="10"
-            placeholder="Masukan teks disini..."
+            placeholder="Masukan teksmu disini..."
           ></textarea>
         </div>
         <div class="row">
           <div class="col">
-            <label for="langlist">Bahasa</label>
-            <select name="langlist" id="langlist" aria-label="Pilihan bahasa"></select>
+            <label for="langlist" title="Bahasa yang dipakai untuk berbicara">Bahasa</label>
+            <select class="langlist" name="langlist" id="langlist" aria-label="Pilihan bahasa">
+              <option>Pilih Bahasa</option>
+            </select>
           </div>
           <div class="col">
-            <label for="rate">Kecepatan: <span class="rate">1.0</span></label>
-            <input type="range" id="rate" min="0.5" max="2.0" step="0.1" value="1.0" />
+            <label for="rate" title="Kecepatan berbicara"
+              >Kecepatan <span class="label-value rate">1.0</span></label
+            >
+            <input type="range" name="rate" min="0.2" max="2" step="0.2" value="1" />
+          </div>
+          <div class="col">
+            <label for="pitch" title="Ketinggian suara bicara"
+              >Ketinggian <span class="label-value pitch">1.0</span></label
+            >
+            <input type="range" name="pitch" min="0.2" max="2" step="0.2" value="1" />
           </div>
         </div>
-        <div>
-          <button class="btn btn-katakan" type="button">Katakan</button>
-          <button class="btn btn-pause" type="button">Jeda</button>
-          <button class="btn btn-stop" type="button">Hentikan</button>
+        <div class="btn-group">
+          <button class="btn btn-katakanlah">Katakanlah</button>
+          <button class="btn btn-pause" disabled>Jeda</button>
+          <button class="btn btn-stop" disabled>Hentikan</button>
         </div>
       </div>
     </main>
+    <!-- Akhir main -->
+
+    <!-- Awal footer, berisi navigasi menu -->
     <footer>
       <nav>
         <ul>
           <li>
-            <a aria-current="page" href="#">&#128488; <span>Teks ke Suara</span></a>
+            <a aria-current="page" href="/" class="nav-link active"
+              >&#128488; <span>Teks ke Suara</span></a
+            >
           </li>
           <li>
-            <a href="#">&#128483; <span>Suara ke Teks</span></a>
+            <a href="/pages/speech_2_text.html" class="nav-link"
+              >&#128483; <span>Suara ke Teks</span></a
+            >
           </li>
         </ul>
       </nav>
     </footer>
+    <!-- Akhir footer -->
   </body>
 </html>
