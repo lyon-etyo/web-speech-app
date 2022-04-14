@@ -190,7 +190,7 @@ utterance.addEventListener("pause", evt => {
 // Ketika ucapan dilanjutkan untuk diucapkan nonaktifkan fungsionaltas dari
 // tombol katakanlah dan pilihan bahasa ucapan
 utterance.addEventListener("resume", evt => {
-  speakButton.textContent = "katakanlahlah";
+  speakButton.textContent = "Katakanlahlah";
   disableElements(true, speakButton, voiceLangList);
   disableElements(false, pauseButton);
 });
@@ -198,7 +198,7 @@ utterance.addEventListener("resume", evt => {
 // Ketika ucapan selesai diucapkan aktifkan kembali fungsionaltas dari
 // teks area, tombol katakanlah, dan pilihan bahasa ucapan
 utterance.addEventListener("end", evt => {
-  speakButton.textContent = "katakanlahlah";
+  speakButton.textContent = "Katakanlahlah";
   disableElements(false, textarea, speakButton, voiceLangList);
   disableElements(true, stopButton, pauseButton);
 });
