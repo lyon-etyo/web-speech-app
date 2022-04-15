@@ -93,6 +93,7 @@ function resumeFromLastWord() {
     utterance.text = utterance.text.substring(currentCharacterIndex);
     if (currentCharacterIndex <= 0) return;
     playSpeech();
+    speakButton.textContent = "Katakanlah";
   }
 }
 
@@ -178,7 +179,7 @@ utterance.addEventListener("pause", evt => {
 // Ketika ucapan dilanjutkan untuk diucapkan nonaktifkan fungsionaltas dari
 // tombol katakanlah dan pilihan bahasa ucapan
 utterance.addEventListener("resume", evt => {
-  speakButton.textContent = "Katakanlahlah";
+  speakButton.textContent = "Katakanlah";
   disableElements(true, speakButton, voiceLangList);
   disableElements(false, pauseButton);
 });
@@ -186,7 +187,7 @@ utterance.addEventListener("resume", evt => {
 // Ketika ucapan selesai diucapkan aktifkan kembali fungsionaltas dari
 // teks area, tombol katakanlah, dan pilihan bahasa ucapan
 utterance.addEventListener("end", evt => {
-  speakButton.textContent = "Katakanlahlah";
+  speakButton.textContent = "Katakanlah";
   disableElements(false, textarea, speakButton, voiceLangList);
   disableElements(true, stopButton, pauseButton);
 });
