@@ -10,3 +10,15 @@ if ("serviceWorker" in navigator) {
     }
   });
 }
+
+// Fungsi untuk mengeset nilai label pada label kecepatan dan ketinggian
+function setOptionLabelValue(optionsLabel, option) {
+  optionsLabel.forEach(label => {
+    if (label.classList.contains(option.name)) label.textContent = option.value;
+  });
+}
+
+// Fungsi untuk menonaktifkan beberapa input sekaligus
+function disableElements(disableState, ...elements) {
+  elements.forEach(element => (element.disabled = disableState));
+}
