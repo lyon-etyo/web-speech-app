@@ -21,21 +21,62 @@
     />
     <link rel="stylesheet" href="/css/style.css" />
     <script src="/js/app.js" defer></script>
+    <script src="/js/speech_to_text.js" defer></script>
   </head>
   <body>
+    <!-- Awal Header, Berisi judul aplikasi dan link bantuan -->
     <header>
       <div class="container">
         <h2>Katakanlah</h2>
       </div>
+      <a class="help" title="Bantuan" href="#">?</a>
     </header>
-    <div class="container">
-      <div class="speech-2-text">
-        <div class="area-teks"></div>
-        <button type="button">&#128466;</button>
+    <!-- Akhir Header -->
+
+    <!-- Awal Main, berisi markup utama aplikasi -->
+    <main>
+      <div class="container">
+        <div class="speech-2-text row">
+          <div class="area-teks"></div>
+          <button class="btn btn-clip" title="Salin teks" disabled>
+            <!-- prettier-ignore -->
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 24 24" width="16px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+          </button>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-katakanlah">Katakanlah</button>
+          <button class="btn btn-stop" disabled>Hentikan</button>
+          <button class="btn btn-save" disabled>Simpan ke File</button>
+        </div>
       </div>
-      <button type="button">Katakan</button>
-      <button type="button">Hentikan</button>
-      <button type="button">Simpan ke File</button>
-    </div>
+    </main>
+    <!-- Akhir Main -->
+
+    <!-- Awal footer, berisi navigasi menu -->
+    <footer>
+      <nav>
+        <ul>
+          <li>
+            <a aria-current="page" href="/" class="nav-link">
+              <!-- prettier-ignore -->
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 24 24" width="20px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+              </span>
+              <span>Teks ke Suara</span>
+            </a>
+          </li>
+          <li>
+            <a href="/pages/speech_2_text.html" class="nav-link active">
+              <!-- prettier-ignore -->
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 24 24" width="20px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 15c1.66 0 2.99-1.34 2.99-3L15 6c0-1.66-1.34-3-3-3S9 4.34 9 6v6c0 1.66 1.34 3 3 3zm-1.2-9.1c0-.66.54-1.2 1.2-1.2s1.2.54 1.2 1.2l-.01 6.2c0 .66-.53 1.2-1.19 1.2s-1.2-.54-1.2-1.2V5.9zm6.5 6.1c0 3-2.54 5.1-5.3 5.1S6.7 15 6.7 12H5c0 3.41 2.72 6.23 6 6.72V22h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg>
+              </span>
+              <span>Suara ke Teks</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+    <!-- Akhir footer -->
   </body>
 </html>
