@@ -30,8 +30,11 @@ const optionsLabel = document.querySelectorAll(".label-value");
 ===============================================================================
 */
 
-// Fungsi untuk mengambil bahasa-bahasa suara yang tersedia
-// di dalam Speech Synthesis
+/**
+ * Fungsi untuk mengambil bahasa-bahasa suara yang tersedia
+ * di dalam Speech Synthesis
+ *
+ */
 function populateVoices() {
   try {
     voices = speechSynthesis.getVoices().sort(function (a, b) {
@@ -53,7 +56,10 @@ function populateVoices() {
   });
 }
 
-// Fungsi untuk mengucapkan ucapan
+/**
+ * Fungsi untuk mengucapkan ucapan
+ *
+ */
 function playSpeech() {
   if (!textarea.value || !utterance.text) return;
   try {
@@ -69,7 +75,10 @@ function playSpeech() {
   }
 }
 
-// Fungsi untuk menjeda ucapan
+/**
+ * Fungsi untuk menjeda ucapan
+ *
+ */
 function pauseSpeech() {
   if (speechSynthesis.speaking) speechSynthesis.pause();
 }
@@ -86,7 +95,10 @@ function stopSpeech() {
   }
 }
 
-// Fungsi untuk melanjutkan ucapan dari kata yang terakhir diucapkan
+/**
+ * Fungsi untuk melanjutkan ucapan dari kata yang terakhir diucapkan
+ *
+ */
 function resumeFromLastWord() {
   if (utterance.text) {
     speechSynthesis.cancel();
@@ -97,7 +109,11 @@ function resumeFromLastWord() {
   }
 }
 
-// Fungsi untuk mengeset properti bahasa ucapan
+/**
+ * Fungsi untuk mengeset properti bahasa ucapan
+ *
+ *
+ */
 function setVoice() {
   try {
     utterance.voice = voices.find(voice => voice.name === this.value);
@@ -108,9 +124,13 @@ function setVoice() {
   }
 }
 
-// Fungsi untuk mengeset properti rate atau pitch pada speech
-// kemudian melanjutkan berbicara
-// jika reset = true maka nilai rate dan pitch
+/**
+ * Fungsi untuk mengeset properti rate atau pitch pada speech
+ * kemudian melanjutkan berbicara
+ * jika reset = true maka nilai rate dan pitch
+ *
+ * @param {Boolean} reset
+ */
 function setOption(reset) {
   try {
     if (reset) this.value = 1.0;
