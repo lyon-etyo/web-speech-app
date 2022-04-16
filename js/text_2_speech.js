@@ -161,12 +161,16 @@ voiceLangList.addEventListener("change", setVoice);
 
 // Ketika terjadi perubahan nilai pada input kecepatan dan ketinggian
 options.forEach(option => {
-  option.addEventListener("change", evt => {
+  option.addEventListener("change", _ => {
     setOption.call(option, false);
     setOptionLabelValue(optionsLabel, option);
   });
   option.addEventListener("contextmenu", evt => {
     evt.preventDefault();
+    setOption.call(option, true);
+    setOptionLabelValue(optionsLabel, option);
+  });
+  option.previousElementSibling.firstElementChild.addEventListener("click", _ => {
     setOption.call(option, true);
     setOptionLabelValue(optionsLabel, option);
   });
