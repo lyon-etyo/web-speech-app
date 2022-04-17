@@ -23,7 +23,7 @@ function disableElements(disableState, ...elements) {
   elements.forEach(element => (element.disabled = disableState));
 }
 
-// Fungsi untuk memunchulkan tooltip
+// Fungsi untuk memunculkan tooltip
 function showTooltip(element) {
   if (element.lastElementChild.className == "tooltip") return;
   const tooltip = document.createElement("div");
@@ -40,3 +40,11 @@ function showTooltip(element) {
     tooltip.remove();
   }, 2000);
 }
+
+// Akses DOM
+const linkBack = document.querySelector(".link-back");
+
+// Ketika ikon panah ke-kiri di klik maka akan kembali ke halaman sebelumnya
+linkBack.addEventListener("click", _ => {
+  window.history.back();
+});
