@@ -218,6 +218,15 @@ function CapitalizeFirstLetterOfSentence(text) {
   return text.replace(/(?<=\. )\w{1,}/gi, capitalize);
 }
 
+/**
+ * Fungsi untuk memindahkan posisi scrollbar ke bawah
+ * agar baris teks pada posisi terakhir tetap tersorot
+ *
+ */
+function setScrollbarToBottom() {
+  if (this.scrollHeight > this.offsetHeight) this.scrollTop = this.scrollHeight;
+}
+
 /* 
 ===============================================================================
                         Event Listener dan Event Handler 
@@ -230,3 +239,6 @@ speakButton.addEventListener("click", startSpeak);
 stopButton.addEventListener("click", stopSpeak);
 saveButton.addEventListener("click", saveToFile);
 clipButton.addEventListener("click", copyToClipboard);
+
+// Ketika sesi pengenalan suara
+recognition.addEventListener("result", setScrollbarToBottom.bind(textarea));
