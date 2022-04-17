@@ -16,7 +16,7 @@ let voices = [];
 let currentCharacterIndex;
 
 // Akses DOM
-const textarea = document.querySelector(".text");
+const textarea = document.querySelector(".area-teks");
 const voiceLangList = document.querySelector(".langlist");
 const speakButton = document.querySelector(".btn-katakanlah");
 const pauseButton = document.querySelector(".btn-pause");
