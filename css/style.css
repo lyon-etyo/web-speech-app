@@ -316,7 +316,7 @@ label {
   border-radius: var(--size-8px);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
   font-family: inherit;
-  height: clamp(8rem, 42vmin, 15rem);
+  height: clamp(8rem, 36vmin, 12rem);
 
   padding: var(--size-24px) 2rem;
   line-height: var(--size-24px);
