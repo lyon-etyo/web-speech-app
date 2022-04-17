@@ -1,8 +1,8 @@
 {
   "name": "Katakanlah",
   "short_name": "Katakanlah",
-  "theme_color": "#80d9ff",
-  "background_color": "#80d9ff",
+  "theme_color": "#008fcc",
+  "background_color": "#007db3",
   "display": "standalone",
   "orientation": "portrait-primary",
   "scope": "/",

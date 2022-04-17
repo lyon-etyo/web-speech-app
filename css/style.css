@@ -48,7 +48,7 @@ a {
 :root {
   --ff-primary: "Quicksand", sans-serif;
 
-  --clr-primary: hsl(198, 100%, 45%);
+  --clr-primary: hsl(198, 100%, 40%);
   --clr-secondary-blue: hsl(198, 100%, 75%);
   --clr-secondary-red: hsl(355, 78%, 56%);
   --clr-secondary-yellow: hsl(57, 100%, 50%);
