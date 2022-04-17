@@ -22,3 +22,21 @@ function setOptionLabelValue(optionsLabel, option) {
 function disableElements(disableState, ...elements) {
   elements.forEach(element => (element.disabled = disableState));
 }
+
+// Fungsi untuk memunchulkan tooltip
+function showTooltip(element) {
+  if (element.lastElementChild.className == "tooltip") return;
+  const tooltip = document.createElement("div");
+  tooltip.innerText = "Tersalin";
+  tooltip.className = "tooltip";
+
+  element.appendChild(tooltip);
+  tooltip.setAttribute("open", "");
+  setTimeout(_ => {
+    tooltip.removeAttribute("open");
+    tooltip.setAttribute("close", "");
+  }, 1400);
+  setTimeout(() => {
+    tooltip.remove();
+  }, 2000);
+}

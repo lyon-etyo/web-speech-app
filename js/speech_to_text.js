@@ -140,6 +140,7 @@ function copyToClipboard() {
       if (result.state == "granted" || result.state == "prompt") {
         const text = CapitalizeFirstLetterOfSentence(textarea.innerText);
         navigator.clipboard.writeText(text);
+        showTooltip(clipButton);
       }
     });
   } catch (error) {
