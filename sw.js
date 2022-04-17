@@ -15,6 +15,15 @@ const assets = [
   "pages/fallback.html",
 ];
 
+// Fungsi untuk memberi batasan jumlah cache yang disimpan
+async function limitCacheSize(name, size) {
+  const caching = await caches.open(name);
+  const cachingKeys = await caching.keys();
+  if (cachingKeys.length > size) {
+    cachingKeys.slice(0, cachingKeys.length - size).forEach(key => caching.delete(key));
+  }
+}
+
 // Pada saat service worker pertama kali diinstall maka
 // aplikasi pada melakukan caching assets
 self.addEventListener("install", evt => {
@@ -56,6 +65,7 @@ self.addEventListener("fetch", evt => {
         const fetchResponse = await fetch(evt.request);
         const caching = await caches.open(dynamicCacheName);
         await caching.put(evt.request.url, fetchResponse.clone());
+        limitCacheSize(dynamicCacheName, 25);
         return fetchResponse;
       } catch (error) {
         if (evt.request.url.indexOf(".html") > -1) return caches.match("/pages/fallback.html");
