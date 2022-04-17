@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Lyon Etyo" />
+    <meta name="description" content="Text to Speech and Speech Recognition app" />
+    <meta name="keywords" content="text to speech,speech recognition" />
+    <meta name="theme-color" content="#80d9ff" />
+    <title>Katakanlah</title>
+    <link rel="apple-touch-icon" href="/images/icons/maskable_icon_x192.png" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/app.js" defer></script>
+  </head>
+  <body>
+    <!-- Awal Header, Berisi judul aplikasi dan ink bantuna -->
+    <header>
+      <div class="container">
+        <h2>Katakanlah</h2>
+      </div>
+      <!-- prettier-ignore -->
+      <a class="link link-back" title="Kembali" href="javascript:void()">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      </a>
+      <!-- prettier-ignore -->
+      <a class="link link-feedback" title="Beri Tanggapan" href="https://shorturl.at/fqGOV" >
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17l-.59.59-.58.58V4h16v12zm-9.5-2H18v-2h-5.5zm3.86-5.87c.2-.2.2-.51 0-.71l-1.77-1.77c-.2-.2-.51-.2-.71 0L6 11.53V14h2.47l5.89-5.87z"/></svg>
+      </a>
+    </header>
+    <!-- Akhir Header -->
+
+    <!-- Awal Main, berisi daftar bantuan -->
+    <main class="help">
+      <div class="container">
+        <div class="row">
+          <div class="area-teks">
+            <div class="row">
+              <h3>Petunjuk Penggunaan Teks ke Suara</h3>
+              <ol>
+                <li>Tap atau klik pada area teks (area dengan background kertas)</li>
+                <li>Masukan Teks yang ingin dibacakan</li>
+                <li>
+                  Pilih bahasa teks yang sesuai dengan tulisan yang akan dibaca pada pilihan bahasa
+                </li>
+                <li>
+                  Sesuaikan Kecepatan suara untuk teks yang akan dibaca dengan menggeser meteran
+                  kecepatan
+                </li>
+                <li>
+                  Sesuaikan Ketinggian suara untuk teks yang akan dibaca dengan menggeser meteran
+                  ketinggian
+                </li>
+                <li>Tekan tombol Katakanlah untuk memulai pembacaan oleh aplikasi</li>
+                <li>Tekan tombol Jeda untuk menghentikan sementara pembacaan</li>
+                <li>Tekan tombol Lanjutkan untuk melanjutkan pembacaan</li>
+                <li>Tekan tombol Hentikan untuk menghentikan pembacaan</li>
+              </ol>
+            </div>
+            <div class="row">
+              <h3>Petunjuk Penggunaan Suara ke Teks</h3>
+              <ol>
+                <li>Tekan tombol Katakanlah untuk memulai sesi pengenalan suara ke teks</li>
+                <li>
+                  Berbicaralah sesuatu maka aplikasi akan menuliskan pembicaraanmu pada area teks
+                  (area dengan background kertas)
+                </li>
+                <li>
+                  Tekan tombol Simpan ke File untuk menyimpan teks pembicaraanmu ke file teks (.txt)
+                </li>
+                <li>Tekan ikon dengan simbol salin untuk menyalin teks pembicaraanmu</li>
+                <li>
+                  Tekan tombol Hentikan untuk menghentikan sesi pengenalan suara ke teks dan
+                  membersihkan area teks
+                </li>
+              </ol>
+            </div>
+            <div class="row">
+              <h3>Perintah Suara</h3>
+              <ol>
+                <li>Katakan "Buat Baris Baru" untuk menulis dibaris baru</li>
+                <li>Katakan "Buat Paragraf" untuk membuat paragraf baru</li>
+                <li>Katakan "Hapus Paragraf" untuk menghapus isi paragraf saat ini</li>
+              </ol>
+            </div>
+            <div class="row tips">
+              <h4>Catatan</h4>
+              <div>
+                <!-- prettier-ignore -->
+                <p>Pada menu Teks ke Suara, klik kanan pada meteran (Pengguna Komputer Desktop) atau Tap
+                Angka Label (Pengguna Smartphone) untuk mereset Kecepatan atau Ketinggian suara
+              </p>
+                <!-- prettier-ignore -->
+                <p>Pada menu Suara ke Teks jaringan internet diperlukan untuk memproses hasil pengenalan
+                suara
+              </p>
+                <p>
+                  Pada menu Suara ke Teks sebaiknya dijalankan melalui Komputer Desktop atau Laptop
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Akhir main -->
+
+    <!-- Awal footer, berisi navigasi menu -->
+    <footer>
+      <nav class="bottom-navigation">
+        <ul class="nav-container">
+          <li class="nav-item">
+            <a href="/" class="nav-link">
+              <!-- prettier-ignore -->
+              <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 24 24" width="20px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+              </span>
+              <span>Teks ke Suara</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a aria-current="page" href="/pages/speech_2_text.html" class="nav-link">
+              <!-- prettier-ignore -->
+              <span class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 24 24" width="20px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 15c1.66 0 2.99-1.34 2.99-3L15 6c0-1.66-1.34-3-3-3S9 4.34 9 6v6c0 1.66 1.34 3 3 3zm-1.2-9.1c0-.66.54-1.2 1.2-1.2s1.2.54 1.2 1.2l-.01 6.2c0 .66-.53 1.2-1.19 1.2s-1.2-.54-1.2-1.2V5.9zm6.5 6.1c0 3-2.54 5.1-5.3 5.1S6.7 15 6.7 12H5c0 3.41 2.72 6.23 6 6.72V22h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg>
+              </span>
+              <span>Suara ke Teks</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+    <!-- Akhir footer -->
+  </body>
+</html>
