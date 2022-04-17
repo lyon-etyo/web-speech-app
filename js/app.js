@@ -45,6 +45,8 @@ function showTooltip(element) {
 const linkBack = document.querySelector(".link-back");
 
 // Ketika ikon panah ke-kiri di klik maka akan kembali ke halaman sebelumnya
-linkBack.addEventListener("click", _ => {
-  window.history.back();
-});
+if (linkBack) {
+  linkBack.addEventListener("click", _ => {
+    window.history.back();
+  });
+}
