@@ -8,6 +8,8 @@
 // Merepresentasikan speech request atau permintaan untuk mengucapkan teks
 const utterance = new SpeechSynthesisUtterance();
 
+const speech = window.speechSynthesis;
+
 // Inisiasi array kosong nantinya akan diisi dengan bahasa-bahasa ucapan
 let voices = [];
 
@@ -37,7 +39,7 @@ const optionsLabel = document.querySelectorAll(".label-value");
  */
 function populateVoices() {
   try {
-    voices = speechSynthesis.getVoices().sort(function (a, b) {
+    voices = speech.getVoices().sort(function (a, b) {
       const aname = a.name.toUpperCase(),
         bname = b.name.toUpperCase();
       if (aname < bname) return -1;
@@ -45,7 +47,7 @@ function populateVoices() {
       else return +1;
     });
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
   }
 
   const optionElement = document.createElement("option");
@@ -64,14 +66,14 @@ function playSpeech() {
   if (!textarea.value || !utterance.text) return;
   try {
     // Jika sedang dijeda maka lanjutkan berbicara
-    if (speechSynthesis.paused && speechSynthesis.speaking) {
-      speechSynthesis.resume();
+    if (speech.paused && speech.speaking) {
+      speech.resume();
     }
 
     // Mengucapkan ucapan
-    speechSynthesis.speak(utterance);
+    speech.speak(utterance);
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
   }
 }
 
@@ -80,18 +82,18 @@ function playSpeech() {
  *
  */
 function pauseSpeech() {
-  if (speechSynthesis.speaking) speechSynthesis.pause();
+  if (speech.speaking) speech.pause();
 }
 
 // Fungsi untuk menghentikan ucapan yang sedang diucapkan
 function stopSpeech() {
   if (!textarea.value || !utterance.text) return;
   try {
-    speechSynthesis.resume();
-    speechSynthesis.cancel();
+    speech.resume();
+    speech.cancel();
     utterance.text = "";
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
   }
 }
 
@@ -101,7 +103,7 @@ function stopSpeech() {
  */
 function resumeFromLastWord() {
   if (utterance.text) {
-    speechSynthesis.cancel();
+    speech.cancel();
     utterance.text = utterance.text.substring(currentCharacterIndex);
     if (currentCharacterIndex <= 0) return;
     playSpeech();
@@ -120,7 +122,7 @@ function setVoice() {
     if (!textarea.value || !utterance.text) return;
     resumeFromLastWord();
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
   }
 }
 
@@ -151,10 +153,10 @@ function setOption(reset) {
 // // Ketika awal halaman dimuat
 populateVoices();
 // Fallback code untuk browser selain chrome
-if (speechSynthesis.onvoiceschanged !== undefined) {
-  speechSynthesis.onvoiceschanged = populateVoices;
+if (speech.onvoiceschanged !== undefined) {
+  speech.onvoiceschanged = populateVoices;
 }
-// speechSynthesis.addEventListener("voiceschanged", populateVoices);
+// speech.addEventListener("voiceschanged", populateVoices);
 
 // Ketika terjadi perubahan pilihan pada pilihan bahasa ucapan
 voiceLangList.addEventListener("change", setVoice);
