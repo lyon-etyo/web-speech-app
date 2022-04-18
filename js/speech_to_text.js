@@ -1,12 +1,12 @@
-/* 
-===============================================================================
-                    Inisiasi dan Instansiasi Variabel dan Objek
-===============================================================================
-*/
-
-// Inisiasi Web Speech API SpeechRecognititon
-// Menangani pengenalan suara dan event
 try {
+  /* 
+  ===============================================================================
+                      Inisiasi dan Instansiasi Variabel dan Objek
+  ===============================================================================
+  */
+
+  // Inisiasi Web Speech API SpeechRecognititon
+  // Menangani pengenalan suara dan event
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!window.SpeechRecognition) {
     throw new Error("SpeechRecognition tidak didukung oleh peramban");
@@ -23,6 +23,8 @@ try {
   // Bahasa pengenalan suara adalah bahasa Indonesia
   recognition.lang = "id-ID";
 
+  const mobile = navigator.userAgent.search(/android|mobile/gi) > -1;
+
   // Akses DOM
   const textarea = document.querySelector(".area-teks");
   const clipButton = document.querySelector(".btn-clip");
@@ -32,6 +34,7 @@ try {
 
   // Membuat elemen paragraf nantinya akan diisi teks dari hasil pengenalan suara
   let paragraph = document.createElement("p");
+  textarea.appendChild(paragraph);
 
   /* 
 ===============================================================================
@@ -47,6 +50,7 @@ try {
    * Catatan: Pastikan aplikasi diizinkan untuk mengakses microphone *
    */
   function startSpeak() {
+    if (mobile) recognition.continuous = false;
     recognition.addEventListener("result", recognizeSpeech);
     recognition.addEventListener("end", recognition.start);
     recognition.start();
@@ -60,7 +64,7 @@ try {
    * @param {SpeechRecognitionEvent Object} evt
    */
   function recognizeSpeech(evt) {
-    textarea.appendChild(paragraph);
+    // textarea.appendChild(paragraph);
     // Ubah hasil pengenalan suara ke bentuk Array
     // Mapping hinggga pada properti transcrip
     // untuk mendapatkan teks hasil pengenalan suara
@@ -89,34 +93,31 @@ try {
     // Menampilkan teks hasil pengenalan suara setelah diproses pada paragraf
     paragraph.innerText = processText;
 
-    // if (evt.results[0].isFinal) {
-    //   paragraph = paragraph.cloneNode();
-    //   textarea.appendChild(paragraph);
-    // }
+    // Pada perangkat mobile akan membuat paragraph baru secara otomatis
+    if (mobile && evt.results[0].isFinal) {
+      paragraph = paragraph.cloneNode();
+      textarea.appendChild(paragraph);
+    }
 
-    // Perintah untuk membuat paragraf baru
-    const breakRow = /buat paragraf$/gi.test(processText);
     try {
+      // Perintah untuk membuat paragraf baru
+      const breakRow = /buat paragraf$/gi.test(processText);
       if (breakRow) {
         paragraph.innerText = paragraph.innerText.replace(/buat paragraf$/gi, "");
         recognition.abort();
         paragraph = paragraph.cloneNode();
         textarea.appendChild(paragraph);
       }
-    } catch (error) {
-      console.error(error);
-    }
 
-    // Perintah untuk menghapus paragraf saat ini
-    const deleteRow = /hapus paragraf/gi.test(processText);
-    try {
+      // Perintah untuk menghapus paragraf saat ini
+      const deleteRow = /hapus paragraf/gi.test(processText);
       if (deleteRow) {
         paragraph.innerText = paragraph.innerText.replace(/hapus paragraf$/gi, "");
         recognition.abort();
         paragraph.remove();
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
