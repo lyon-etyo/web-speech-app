@@ -234,7 +234,10 @@ try {
    *
    */
   function setScrollbarToBottom() {
-    if (this.scrollHeight > this.offsetHeight) this.scrollTop = this.scrollHeight;
+    // if (this.scrollHeight > this.offsetHeight) this.scrollTop = this.scrollHeight;
+    if (document.scrollHeight > document.offsetHeight) {
+      window.scrollTo(0, document.scrollHeight);
+    }
   }
 
   /* 
@@ -251,7 +254,7 @@ try {
   clipButton.addEventListener("click", copyToClipboard);
 
   // Ketika sesi pengenalan suara
-  recognition.addEventListener("result", setScrollbarToBottom.bind(textarea));
+  recognition.addEventListener("result", setScrollbarToBottom);
 } catch (error) {
   console.error(error.message);
 }
