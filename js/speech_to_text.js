@@ -237,7 +237,12 @@ try {
     // if (this.scrollHeight > this.offsetHeight) this.scrollTop = this.scrollHeight;
 
     if (document.body.scrollHeight >= window.innerHeight) {
-      window.scrollTo(0, document.body.scrollHeight);
+      window.scrollBy({
+        top: document.body.scrollHeight,
+        left: 0,
+        behavior: "smooth",
+      });
+      // window.scrollTo(0, document.body.scrollHeight);
     }
   }
 
