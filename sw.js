@@ -1,6 +1,6 @@
 // Nama cache, digunakan sebagai key untuk melakukan operasi caching
-const staticCacheName = "static-assets-v2";
-const dynamicCacheName = "dynamic-assets-v2";
+const staticCacheName = "static-assets-v1";
+const dynamicCacheName = "dynamic-assets-v1";
 
 // Daftar asset dasar yang perlu di caching
 const assets = [
@@ -12,7 +12,7 @@ const assets = [
   "https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap",
   "https://fonts.gstatic.com/s/quicksand/v28/6xKtdSZaM9iE8KbpRA_hJFQNcOM.woff2",
   "https://fonts.gstatic.com/s/quicksand/v28/6xKtdSZaM9iE8KbpRA_hK1QN.woff2",
-  "pages/fallback.html",
+  "/pages/fallback.html",
 ];
 
 // Fungsi untuk memberi batasan jumlah cache yang disimpan
@@ -63,12 +63,17 @@ self.addEventListener("fetch", evt => {
       if (cachedResponse) return cachedResponse;
       try {
         const fetchResponse = await fetch(evt.request);
-        const caching = await caches.open(dynamicCacheName);
-        await caching.put(evt.request.url, fetchResponse.clone());
-        limitCacheSize(dynamicCacheName, 25);
-        return fetchResponse;
+        if (fetchResponse.status < 400) {
+          const caching = await caches.open(dynamicCacheName);
+          await caching.put(evt.request.url, fetchResponse.clone());
+          limitCacheSize(dynamicCacheName, 25);
+          return fetchResponse;
+        }
+        // Jika request mengembalikan kode response 400 ke atas
+        return caches.match("/pages/fallback.html");
       } catch (error) {
-        if (evt.request.url.indexOf(".html") > -1) return caches.match("/pages/fallback.html");
+        // Jika kondisi luring
+        return caches.match("/pages/fallback.html");
       }
     })
   );
