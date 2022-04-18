@@ -34,7 +34,6 @@ try {
 
   // Membuat elemen paragraf nantinya akan diisi teks dari hasil pengenalan suara
   let paragraph = document.createElement("p");
-  textarea.appendChild(paragraph);
 
   /* 
 ===============================================================================
@@ -64,7 +63,7 @@ try {
    * @param {SpeechRecognitionEvent Object} evt
    */
   function recognizeSpeech(evt) {
-    // textarea.appendChild(paragraph);
+    textarea.appendChild(paragraph);
     // Ubah hasil pengenalan suara ke bentuk Array
     // Mapping hinggga pada properti transcrip
     // untuk mendapatkan teks hasil pengenalan suara
@@ -110,9 +109,18 @@ try {
       }
 
       // Perintah untuk menghapus paragraf saat ini
-      const deleteRow = /hapus paragraf/gi.test(processText);
-      if (deleteRow) {
+      const deletecurrentRow = /hapus paragraf/gi.test(processText);
+      if (deletecurrentRow) {
         paragraph.innerText = paragraph.innerText.replace(/hapus paragraf$/gi, "");
+        recognition.abort();
+        paragraph.remove();
+      }
+
+      // Perintah untuk menghapus paragraf saat ini dan sebelumnya
+      const deletePreviousRow = /hapus sebelumnya/gi.test(processText);
+      if (deletePreviousRow) {
+        paragraph.innerText = paragraph.innerText.replace(/hapus sebelumnya$/gi, "");
+        paragraph.previousElementSibling?.remove();
         recognition.abort();
         paragraph.remove();
       }
