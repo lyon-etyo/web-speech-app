@@ -317,7 +317,7 @@ label {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
   font-family: inherit;
   height: clamp(8rem, 36vmin, 12rem);
-
+  overflow: auto;
   padding: var(--size-24px) 2rem;
   line-height: var(--size-24px);
   width: 100%;
@@ -333,7 +333,6 @@ label {
 
 .speech-2-text {
   position: relative;
-  overflow: auto;
 }
 
 .text-2-speech {
