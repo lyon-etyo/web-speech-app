@@ -235,7 +235,8 @@ try {
    */
   function setScrollbarToBottom() {
     // if (this.scrollHeight > this.offsetHeight) this.scrollTop = this.scrollHeight;
-    if (document.body.scrollHeight > document.body.offsetHeight) {
+
+    if (document.body.scrollHeight >= window.innerHeight) {
       window.scrollTo(0, document.body.scrollHeight);
     }
   }
