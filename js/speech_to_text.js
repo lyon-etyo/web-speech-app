@@ -251,7 +251,7 @@ try {
   clipButton.addEventListener("click", copyToClipboard);
 
   // Ketika sesi pengenalan suara
-  recognition.addEventListener("result", setScrollbarToBottom.bind(textarea));
+  recognition.addEventListener("result", setScrollbarToBottom.bind(document.body));
 } catch (error) {
   console.error(error.message);
 }
