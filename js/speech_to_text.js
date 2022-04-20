@@ -31,6 +31,7 @@ try {
   const speakButton = document.querySelector(".btn-katakanlah");
   const stopButton = document.querySelector(".btn-stop");
   const saveButton = document.querySelector(".btn-save");
+  const placeholder = document.querySelector(".placeholder-teks");
 
   // Membuat elemen paragraf nantinya akan diisi teks dari hasil pengenalan suara
   let paragraph = document.createElement("p");
@@ -49,6 +50,7 @@ try {
    * Catatan: Pastikan aplikasi diizinkan untuk mengakses microphone *
    */
   function startSpeak() {
+    placeholder.remove();
     if (mobile) recognition.continuous = false;
     recognition.addEventListener("result", recognizeSpeech);
     recognition.addEventListener("end", recognition.start);
@@ -75,6 +77,10 @@ try {
 
     // Mengganti huruf kecil menjadi huruf besar di awal paragraf
     processText = transcript.replace(/\b[a-z]/, char => char.charAt(0).toUpperCase());
+    // Mengganti kata sampai atau hingga menjadi tanda strip (-) pada keterangan waktu
+    processText = processText.replace(/(?<=\d)\s(sampai|hingga)\s(?=\w)/gi, " - ");
+    // Mengganti kata garis miring menjadi tanda "/"
+    processText = processText.replace(/\sgaris miring\s/gi, "/");
 
     // Perintah untuk mengganti tanda baca pada transcript menjadi
     // tanda baca ",", "!", "?", "(", ")" dan ":"
@@ -140,6 +146,7 @@ try {
     recognition.abort();
 
     textarea.innerHTML = "";
+    textarea.appendChild(placeholder);
     disableElements(false, speakButton);
     disableElements(true, stopButton, clipButton, saveButton);
   }
