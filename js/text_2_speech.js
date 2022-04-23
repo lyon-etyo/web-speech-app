@@ -10,6 +10,8 @@ const utterance = new SpeechSynthesisUtterance();
 
 const speech = window.speechSynthesis;
 
+const mobile = navigator.userAgent.search(/android|mobile/gi) > -1;
+
 // Inisiasi array kosong nantinya akan diisi dengan bahasa-bahasa ucapan
 let voices = [];
 
@@ -66,8 +68,11 @@ function playSpeech() {
   if (!textarea.value || !utterance.text) return;
   try {
     // Jika sedang dijeda maka lanjutkan berbicara
-    if (speech.paused && speech.speaking) {
+    if (speech.speaking) {
       speech.resume();
+      speakButton.textContent = "Katakanlah";
+      disableElements(true, speakButton, voiceLangList);
+      disableElements(false, pauseButton, stopButton);
     }
 
     // Mengucapkan ucapan
@@ -82,7 +87,12 @@ function playSpeech() {
  *
  */
 function pauseSpeech() {
-  if (speech.speaking) speech.pause();
+  if (speech.speaking) {
+    speech.pause();
+    speakButton.textContent = "Lanjutkan";
+    disableElements(true, pauseButton);
+    disableElements(false, speakButton, voiceLangList, stopButton);
+  }
 }
 
 // Fungsi untuk menghentikan ucapan yang sedang diucapkan
@@ -120,7 +130,7 @@ function setVoice() {
   try {
     utterance.voice = voices.find(voice => voice.name === this.value);
     if (!textarea.value || !utterance.text) return;
-    playSpeech();
+    resumeFromLastWord();
   } catch (error) {
     console.error(error.message);
   }
@@ -138,7 +148,7 @@ function setOption(reset) {
     if (reset) this.value = 1.0;
     utterance[this.name] = this.value;
     if (!textarea.value || !utterance.text) return;
-    playSpeech();
+    resumeFromLastWord();
   } catch (error) {
     console.log(error);
   }
@@ -149,6 +159,12 @@ function setOption(reset) {
                         Event Listener dan Event Handler 
 ===============================================================================
 */
+
+document.addEventListener("DOMContentLoaded", _ => {
+  if (mobile) {
+    pauseButton.style.display = "none";
+  }
+});
 
 // // Ketika awal halaman dimuat
 populateVoices();
@@ -190,6 +206,7 @@ stopButton.addEventListener("click", stopSpeech);
 // Ketika ucapan mulai diucapkan nonaktifkan fungsionaltas dari
 // teks area, tombol katakanlah dan pilihan bahasa ucapan
 utterance.addEventListener("start", evt => {
+  speakButton.textContent = "Katakanlah";
   disableElements(true, textarea, speakButton, voiceLangList);
   disableElements(false, stopButton, pauseButton);
 });
@@ -212,7 +229,8 @@ utterance.addEventListener("resume", evt => {
 
 // Ketika ucapan selesai diucapkan aktifkan kembali fungsionaltas dari
 // teks area, tombol katakanlah, dan pilihan bahasa ucapan
-utterance.addEventListener("end", evt => {
+utterance.addEventListener("end", _ => {
+  stopSpeech();
   speakButton.textContent = "Katakanlah";
   disableElements(false, textarea, speakButton, voiceLangList);
   disableElements(true, stopButton, pauseButton);
